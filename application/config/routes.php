@@ -215,14 +215,12 @@ $route['import-database']       = 'Admin/Operation/importDatabase';
 $route['export-mail-database']  = 'Admin/Operation/databaseBackUpAndMail';
 $route['drop-all-tables']       = 'Admin/Operation/dropAllTables';
 
-
 /* **************UI route ******************** */
 $route['/']                         = "Home/index";
 $route['home']                      = "Home/index";
 $route['about-us']                  = "Home/aboutUs";
 $route['contact-us']                = "Home/contactUs";
 $route['shop']                      = "Home/product";
-// $route['product']                   = "Home/product";
 $route['product-detail/(:any)']     = "Home/productDetail";
 $route['blog']                      = "Home/blog";
 $route['cart']                      = "Home/cart";
@@ -230,7 +228,9 @@ $route['whishlist']                 = "Home/whishlist";
 $route['checkout']                  = "Home/checkout";
 $route['register-customer']         = "Home/registerCustomer";
 $route['customer-login']            = "Home/customerLogin";
+$route['login']                     = "Home/login";
 $route['logout']                    = "Home/logout";
+$route['register']                  = "Home/register";
 $route['change-password']           = "Home/changePassword";
 $route['subscribe-newsletter']      = "Home/subscribeNewsletter";
 $route['add-cust-address']          = "Home/submitCustomerAddress";
@@ -242,6 +242,14 @@ $route['order-history']             = "Home/myOrders";
 $route['order-detail']              = "Home/orderDetail";
 $route['createPdf']                 = "Home/createPdf";
 $route['404-error']                 = "Home/errorPage";
-$route['submit-return']            = "Home/submitReturn";
-$route['submit-replace']            = "Home/submitReplace";
-$route['login']                     = "Home/login";
+
+$route['submit-return-replace']     = "Home/submitReturnReplace";
+$route['submit-rating-reviews']     = "Home/submitProductRatingReview";
+
+$route['termsandcondition']         = "Home/termsandcondition";
+$route['privacy-policy']            = "Home/privacyPolicy";
+$route['search']                    = "Home/privacyPolicy";
+$route['forgot-password']           = "Home/forgotPassword";
+$route['reset-password']            = "Home/restPassword";
+$route['submit-reset-password']     = "Home/submitRestPassword";
+

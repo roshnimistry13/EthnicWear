@@ -16,9 +16,8 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/vendors/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/main.css?v=3.4">
-    <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/font-awesome.min.css"
-        integrity="sha512-i8+QythOYyQke6XbStjt9T4yQHhhM+9Y9yTY1fOxoDQwsQpKMEpIoSQZ8mVomtnVCf9PBvoQDnKl06gGOOD19Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+   
+    <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/font-awesome.min.css" integrity="">
     <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/toastify.min.css">
     <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/custom.css?v=<?php echo VERSION; ?>">
 

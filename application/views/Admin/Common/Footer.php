@@ -59,7 +59,7 @@
 
 <script type="text/javascript" src="<?php echo ADMIN_ASSETS  ?>froala-editor/js/froala_editor.pkgd.min.js">
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 
 <script type="text/javascript">
@@ -68,7 +68,7 @@ var base_url = "<?php echo base_url() ?>";
 
 <script src="<?php echo ADMIN_ASSETS ?>js/application/script.js?v=<?php echo VERSION; ?>"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
 <?php
 	if($this->session->flashdata('success')){?>
 <script type="text/javascript">

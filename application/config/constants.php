@@ -160,11 +160,12 @@ define("MAX_WIDTH" ,"1600");
 
 define("ROW_PER_PAGE" ,"12");
 define("RECENT_VIEW" ,"20");
+define("LINK_EXPIRE_MIN" ,"10");
 
 define("ADMIN_THEME" ,"Admin Theme");
-define("UI_THEME" ,"Multivendor E-Commerce");
+define("UI_THEME" ,"EthnicWear E-Commerce");
 
-define("SITE_NAME" ,"Multivendor");
+define("SITE_NAME" ,"EthnicWear");
 define("SECRETKEY" ,"12!@34#$5%");
 define("SECRETKEY_MESSAGE" ,"Secret key is invalid or null.");
 define("NETWORK_MESSAGE" ,"Network error please try again");

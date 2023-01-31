@@ -1,0 +1,3 @@
+"2023-01-25 04:06:31am "," insert "," INSERT INTO whish_list(`customer_id`, `product_id`) VALUES('1', '110') "," ::1 "," URL: http://localhost/EthnicWear/Home/addtowhisList "," R: http://localhost/EthnicWear/shop"
+"2023-01-25 04:06:33am "," insert "," INSERT INTO whish_list(`customer_id`, `product_id`) VALUES('1', '133') "," ::1 "," URL: http://localhost/EthnicWear/Home/addtowhisList "," R: http://localhost/EthnicWear/shop"
+"2023-01-25 04:06:34am "," insert "," INSERT INTO whish_list(`customer_id`, `product_id`) VALUES('1', '132') "," ::1 "," URL: http://localhost/EthnicWear/Home/addtowhisList "," R: http://localhost/EthnicWear/shop"

@@ -1,6 +1,6 @@
 <?php 
 
-        $logo_path = UI_ASSETS.'images/mv-logo.png';
+        $logo_path = UI_ASSETS.'imgs/mv-logo.png';
 	    $logo_type = pathinfo($logo_path, PATHINFO_EXTENSION);
 		$logo_data = file_get_contents($logo_path);
 		$logo_base64 = 'data:image/' . $logo_type . ';base64,' . base64_encode($logo_data);
@@ -56,38 +56,32 @@
                                 <tr>
                                     <td
                                         style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:11px;">
-                                        Appario Retail Private Ltd
+                                        <?php echo $productdata[0]['company'];?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td
                                         style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:11px;">
-                                        Building No. 5, BGR Warehousing Complex,
+                                        <?php echo $productdata[0]['address'];?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td
                                         style="font-family:Verdana, Geneva, sans-serif; font-weight:300; font-size:11px;">
-                                        Near Shiv Sagar Hotel, Village Vahuli, Bhiwandi, <br>Thane BHIWANDI,
-                                        MAHARASHTRA, 421302
+                                        <?php echo $productdata[0]['city'] .','.$productdata[0]['state'] .','.$productdata[0]['country'] .'-'.$productdata[0]['pin_code'];?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         &nbsp;
                                     </td>
-                                </tr>
-                                <!--<tr>
-										<td>
-											&nbsp;
-										</td>
-									</tr>-->
+                                </tr>                               
                                 <tr>
                                     <td
                                         style="font-family:Verdana, Geneva, sans-serif;font-weight:600; font-size:15px;">
                                         PAN No.:
                                         <span style="font-weight:300; font-size:11px;">
-                                            AALCA0171E
+                                            <?php echo $productdata[0]['pan_no'];?>
                                         </span>
                                     </td>
                                 </tr>
@@ -96,7 +90,7 @@
                                         style="font-family:Verdana, Geneva, sans-serif;font-weight:600; font-size:15px;">
                                         GST Registration No.:
                                         <span style="font-weight:300; font-size:11px;">
-                                            27AALCA0171E1ZZ
+                                            <?php echo $productdata[0]['gstin_no'];?>
                                         </span>
                                     </td>
                                 </tr>
@@ -174,16 +168,7 @@
                                 DOB734-346593
                             </span>
                         </td>
-                    </tr>
-                    <tr>
-                        <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:15px;"
-                            align="right">
-                            Invoice Details:
-                            <span style="font-weight:300; font-size:11px;">
-                                DOB734-346593
-                            </span>
-                        </td>
-                    </tr>
+                    </tr>                    
                     <tr>
                         <td style="font-family:Verdana, Geneva, sans-serif; font-weight:600; font-size:15px;"
                             align="right">
