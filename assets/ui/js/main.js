@@ -667,7 +667,7 @@
                 $("#Reviews").addClass('active show');
                 tab$.trigger("click");
                 $("html, body").animate(
-                    { scrollTop: $("#Reviews").offset().top },
+                    { scrollTop: $("#tab-style3").offset().top },
                     "slow"
                 );
             }

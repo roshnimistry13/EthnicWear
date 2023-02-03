@@ -1,0 +1,1 @@
+"2023-02-02 00:51:25am "," update "," UPDATE product_details SET `view_count` = 129 WHERE 1=1  and product_id = '115' "," ::1 "," URL: http://localhost/EthnicWear/product-detail/black-grey-hand-block-print-legacy-pure-cotton-sustainable-top-with-mirror-work-contrast-print-s-bla "," R: http://localhost/EthnicWear/whishlist"

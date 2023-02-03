@@ -16,7 +16,7 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/vendors/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/main.css?v=3.4">
-   
+
     <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/font-awesome.min.css" integrity="">
     <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/toastify.min.css">
     <link rel="stylesheet" href="<?php echo UI_ASSETS ?>css/custom.css?v=<?php echo VERSION; ?>">
@@ -117,8 +117,16 @@
                     </div>
                     <div class="header-right">
                         <div class="search-style-2">
-                            <form action="#">
-                                <input type="text" placeholder="Search for items...">
+                            <?php 
+                                $search = "";
+                                if(!empty($this->session->userdata('search_sess'))){
+                                    $search 					= $this->session->userdata['search_sess']['search'];
+                                }
+                            ?>
+                            <form id="search_keyword" action="<?php echo base_url('shop');?>" method="post" role="form"
+                                autocomplete="off">
+                                <input type="text" id="txt_search" name="txt_search" autocomplete="off"
+                                    placeholder="Search for items..." value="<?php echo $search;?>">
                             </form>
                         </div>
 
@@ -172,13 +180,15 @@
                             </div>
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="<?php echo base_url('cart')?>">
-                                    <img alt="Evara" src="<?php echo UI_ASSETS ?>imgs/theme/icons/icon-cart.svg">                                    
-                                    <span class="pro-count white total-cart <?php echo ($totalCart > 0) ? "" : "d-none" ;?>"><?php echo $totalCart; ?></span>
-                                    
+                                    <img alt="Evara" src="<?php echo UI_ASSETS ?>imgs/theme/icons/icon-cart.svg">
+                                    <span
+                                        class="pro-count white total-cart <?php echo ($totalCart > 0) ? "" : "d-none" ;?>"><?php echo $totalCart; ?></span>
+
                                 </a>
-                                
-                                <div class="cart-dropdown-wrap cart-dropdown cart-dropdown-hm2 cart-item-list <?php echo $display; ?>">
-                                <?php if(!empty($cart_items)){ ?>
+
+                                <div
+                                    class="cart-dropdown-wrap cart-dropdown cart-dropdown-hm2 cart-item-list <?php echo $display; ?>">
+                                    <?php if(!empty($cart_items)){ ?>
                                     <ul>
                                         <?php if(!empty($cart_items)){ 
                                             $total_cart_amt = 0;
@@ -207,7 +217,8 @@
                                                     </h6>
                                                     <h6 class="mb-1"><span>Quantity : <?php echo $quantity; ?></span>
                                                     </h6>
-                                                    <h6 class="cart-item-price"><i class="fa fa-inr"></i> <?php echo $final_price; ?></h6>
+                                                    <h6 class="cart-item-price"><i class="fa fa-inr"></i>
+                                                        <?php echo $final_price; ?></h6>
                                                 </div>
                                                 <div class="shopping-cart-delete">
                                                     <a href="javascript:void(0)" class="cart_ac_remove"
@@ -222,7 +233,9 @@
                                     <div class="shopping-cart-footer cart__footer">
                                         <div class="shopping-cart-total">
                                             <h4 class="total">Total
-                                            <span class="cart_tot_price"><i class="fa fa-inr"></i><?php echo $total_cart_amt; ?></span></h4>
+                                                <span class="cart_tot_price"><i
+                                                        class="fa fa-inr"></i><?php echo $total_cart_amt; ?></span>
+                                            </h4>
                                         </div>
                                         <div class="shopping-cart-button">
                                             <a href="<?php echo base_url('cart')?>">View cart</a>
@@ -231,7 +244,7 @@
                                     </div>
                                     <?php } }?>
                                 </div>
-                                
+
                             </div>
                             <div class="header-action-icon-2 d-block d-lg-none">
                                 <div class="burger-icon burger-icon-white">
@@ -296,9 +309,13 @@
             </div>
             <div class="mobile-header-content-area">
                 <div class="mobile-search search-style-3 mobile-header-border">
-                    <form action="#">
+                    <!-- <form action="#">
                         <input type="text" placeholder="Search for items…">
                         <button type="submit"><i class="fi-rs-search"></i></button>
+                    </form> -->
+                    <form id="search_keyword" action="<?php echo base_url('shop');?>" method="post" role="form">
+                        <input type="text" id="txt_search" name="txt_search" autocomplete="off"
+                            placeholder="Search for items..." value="<?php echo $search;?>">
                     </form>
                 </div>
                 <div class="mobile-menu-wrap mobile-header-border">

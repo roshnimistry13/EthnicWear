@@ -266,6 +266,18 @@ label.error {
   display:none;
 }
 
+.comment-list::-webkit-scrollbar {
+  display: none;
+}
+
+.comment-list {
+-ms-overflow-style: none;  
+scrollbar-width: none;  
+}
+.comment-list {
+   height: 240px;
+   overflow: auto;
+}
 @media (min-width:320px) and (max-width:767px){
   .wishlist-btn, .btnAddToCart{
     
@@ -282,4 +294,28 @@ label.error {
     width: auto !important;
     text-align: center;
   }
+}
+
+/*** AUTO AUTOCOMPLETE  ***/
+.ui-autocomplete {
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.ui-menu-item .ui-menu-item-wrapper:hover,
+.ui-menu-item .ui-menu-item-wrapper:focus,
+.ui-menu-item:hover,
+.ui-menu-item:focus
+{
+  background-color: #088178 !important;
+}
+.header-style-3 .search-style-2 form input{
+  max-width: 100%;
+}
+
+.ui-widget-content .ui-state-active {
+	border: 1px solid #088178;
+	background: #088178;
+	font-weight: normal;
+	color: #fff;
 }

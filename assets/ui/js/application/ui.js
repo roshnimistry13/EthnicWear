@@ -1604,9 +1604,32 @@ $('.remember-password').click(function() {
 	$('#login').removeClass('d-none');
 });
 
-$('#myText').on("keypress", function(e) {
-	if (e.keyCode == 13) {
-		alert("Enter pressed");
-		return false; // prevent the button click from happening
-	}
-});
+
+/********* SEARCH AUTOCOMPLETE SUGGESTION*/
+$(function() {
+	$( "#txt_search" ).autocomplete({
+		minLength:3,
+	   source: function( request, response ) {
+        // Fetch data
+        $.ajax({
+             url: base_url + "Home/getSuggestion",
+             type: 'post',
+             dataType: "json",
+             data: {
+                  search: request.term
+             },
+             success: function( data ) {
+				var sugg = data['suggestion'];
+                  response( sugg );
+             }
+        });
+	},
+	select: function(event, ui) {
+        if(ui.item){
+            $('#txt_search').val(ui.item.value);
+        }
+        $('#search_keyword').submit();
+    }
+ });
+ });
+

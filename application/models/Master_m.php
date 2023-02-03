@@ -658,7 +658,7 @@ class Master_m extends CI_Model{
 		$this->db->select('o.*');
 		$this->db->from('orders o');
 		$this->db->where('o.customer_id',$customer_id);
-		$this->db->where("Year(o.order_date)", $filetr_year);
+		//$this->db->where("Year(o.order_date)", $filetr_year);
 		$this->db->order_by('o.order_date','desc');
 		$result = $this->db->get()->result_array();
 		return $result;
@@ -722,6 +722,11 @@ class Master_m extends CI_Model{
 		{
 			$end_price = $filter['end_price'];
    			$this->db->where("p.net_price <= $end_price");
+   		}
+		if(isset($filter['tag']) && strlen(trim($filter['tag']))>0)
+		{
+			$tag = $filter['tag'];
+   			$this->db->like('p.tag',$tag);
    		}
 
    		//FILTER SORY BY
@@ -802,6 +807,11 @@ class Master_m extends CI_Model{
 			$end_price = $filter['end_price'];
    			$this->db->where("p1.net_price <= $end_price");
    		}
+
+		if(isset($filter['tag']) && strlen(trim($filter['tag']))>0){
+			$tag 	= $filter['tag'];
+			$this->db->like('p1.tag', $tag);
+		}
 
 		//FILTER SORY BY
 		if(isset($filter['sortby']) && strlen(trim($filter['sortby']))>0)
@@ -2202,6 +2212,7 @@ class Master_m extends CI_Model{
 		return $cart_html;
 	}
 
+	/******* GET AVERAGE OF PRODUCT STAR RATE*/
 	public function getAverageStarrating($product_id){
 		$this->db->select('Round(AVG(star_rate)) as rate');
 		$this->db->from('product_review');
@@ -2210,7 +2221,40 @@ class Master_m extends CI_Model{
 		return $result->rate;
 	}
 
+	/******* */
+	public function gettotalOfProductrates($product_id){
+		$this->db->select('star_rate, COUNT(star_rate) as starcount, SUM(star_rate) as total');
+		$this->db->from('product_review');
+		$this->db->where('product_id',$product_id);
+		$this->db->order_by('star_rate','desc');
+		$this->db->group_by('star_rate');
+		$result = $this->db->get()->result_array();
+		return $result;
+	}
 
+	/***** SEARCH BY KEYWORDS */
+	public function searchBykeywords($search_keyword,$category=null){
+
+		if($category != null || $category != ""){
+			$cat_cond['short_code'] 	= $category;
+			$result						= $this->where('category',$cat_cond);
+			$category_id				= $result[0]['category_id'];	
+			$this->db->where('p.category_id',$category_id);	
+		}
+		if($search_keyword != "" || $search_keyword != null){
+			$this->db->like('p.tag',$search_keyword);
+		}
+		
+		// $this->db->select('DISTINCT(p.product_id) as product_id,p.product_name as product_name, p.short_code, p.net_price as net_price, p.cover_img,p.mrp_price,p.discount,p.variant_code,b.brand_name,c.category_name, p.tag');
+		$this->db->select('DISTINCT(p.product_id) as product_id,p.tag');
+		$this->db->from('product_details p');
+		$this->db->join('brand b','b.brand_id = p.brand_id','left');
+		$this->db->join('category c','c.category_id=p.child_category','left');		
+		$this->db->group_by('p.variant_code');		
+		$result = $this->db->get()->result_array();
+		//echo $this->db->last_query();
+		return $result;	
+	}
 
 /*********************************** API FUNCTION *************************************************** */
 	function getAllProductInGrid($category_id){

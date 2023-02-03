@@ -232,7 +232,7 @@
                                 <!-- Detail Info -->
                             </div>
                         </div>
-                        <div class="tab-style3">
+                        <div class="tab-style3" id="tab-style3">
                             <ul class="nav ul_tabs nav-tabs text-uppercase">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="Description-tab" data-bs-toggle="tab"
@@ -269,7 +269,7 @@
 
                                     </div>
                                 </div>
-                                <?php if(!empty($product_review_list)) {?>
+                                <?php if(!empty($product_review_list)) { ?>
                                 <div class="tab-pane fade " id="Reviews">
                                     <!--Comments-->
                                     <div class="comments-area">
@@ -277,125 +277,88 @@
                                             <div class="col-lg-8">
                                                 <h4 class="mb-30">Customer questions &amp; answers</h4>
                                                 <div class="comment-list">
-                                                    <div class="single-comment justify-content-between d-flex">
-                                                        <div class="user justify-content-between d-flex">
-                                                            <div class="thumb text-center">
-                                                                <img src="<?php echo UI_ASSETS ?>imgs/page/avatar-6.jpg"
-                                                                    alt="">
-                                                                <h6><a href="#">Jacky Chan</a></h6>
-                                                                
-                                                            </div>
-                                                            <div class="desc">
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width:90%">
-                                                                    </div>
-                                                                </div>
-                                                                <p>Thank you very fast shipping from Poland only 3days.
-                                                                </p>
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <p class="font-xs mr-30">December 4, 2020</p>
-                                                                        <!-- <a href="#" class="text-brand btn-reply">Reply
-                                                                            <i class="fi-rs-arrow-right"></i> </a> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--single-comment -->
+                                                    <?php foreach($product_review_list as $review){ 
+                                                        $star_rate      = $review['star_rate']; 
+                                                        $star_width_style     = "width:0%";
+                                                        if($star_rate == 1){
+                                                            $star_width_style = "width:20%";
+                                                        }
+                                                        if($star_rate == 2){
+                                                            $star_width_style = "width:40%";
+                                                        }
+                                                        if($star_rate == 3){
+                                                            $star_width_style = "width:60%";
+                                                        }
+                                                        if($star_rate == 4){
+                                                            $star_width_style = "width:80%";
+                                                        }
+                                                        if($star_rate ==5){
+                                                            $star_width_style = "width:100%";
+                                                        } 
+                                                    ?>
                                                     <div class="single-comment justify-content-between d-flex">
                                                         <div class="user justify-content-between d-flex">
                                                             <div class="thumb text-center">
                                                                 <img src="<?php echo UI_ASSETS ?>imgs/page/default_user.png"
                                                                     alt="">
-                                                                <h6><a href="#">Ana Rosie</a></h6>
-                                                                
+                                                                <h6><a href="#"><?php echo ucwords($review['customer_name']);?></a></h6>                                                                
                                                             </div>
                                                             <div class="desc">
                                                                 <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width:90%">
+                                                                    <div class="product-rating" style="<?php echo $star_width_style;?>">
                                                                     </div>
                                                                 </div>
-                                                                <p>Great low price and works well.</p>
+                                                                <p class="font-xs"><?php echo ucwords($review['review_title']); ?></p>
+                                                                <p class="font-xs"><?php echo  ucwords($review['review_content']); ?></p>
                                                                 <div class="d-flex justify-content-between">
                                                                     <div class="d-flex align-items-center">
-                                                                        <p class="font-xs mr-30">December 4, 2020 </p>
-                                                                        <!-- <a href="#" class="text-brand btn-reply">Reply
-                                                                            <i class="fi-rs-arrow-right"></i> </a> -->
+                                                                        <p class="font-xs mr-30"><?php echo date('F ,d Y',strtotime($review['review_date'])); ?></p>                                                                        
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <!--single-comment -->
-                                                    <div class="single-comment justify-content-between d-flex">
-                                                        <div class="user justify-content-between d-flex">
-                                                            <div class="thumb text-center">
-                                                                <img src="<?php echo UI_ASSETS ?>imgs/page/default_user.png"
-                                                                    alt="">
-                                                                <h6><a href="#">Steven Keny</a></h6>
-                                                                
-                                                            </div>
-                                                            <div class="desc">
-                                                                <div class="product-rate d-inline-block">
-                                                                    <div class="product-rating" style="width:90%">
-                                                                    </div>
-                                                                </div>
-                                                                <p>Authentic and Beautiful, Love these way more than
-                                                                    ever expected They are Great earphones</p>
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <p class="font-xs mr-30">December 4, 2020</p>
-                                                                        <!-- <a href="#" class="text-brand btn-reply">Reply
-                                                                            <i class="fi-rs-arrow-right"></i> </a> -->
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!--single-comment -->
+                                                    </div>  
+                                                    <?php } ?>                                                  
                                                 </div>
                                             </div>
+                                            
                                             <div class="col-lg-4">
                                                 <h4 class="mb-30">Customer reviews</h4>
                                                 <div class="d-flex mb-30">
                                                     <div class="product-rate d-inline-block mr-15">
-                                                        <div class="product-rating" style="width:90%">
+                                                        <div class="product-rating" style="<?php echo $star_width;?>">
                                                         </div>
                                                     </div>
-                                                    <h6>4.8 out of 5</h6>
+                                                    <h6><?php echo $avg_rate_star; ?> out of 5</h6>
                                                 </div>
+                                                <?php if(!empty($totalProductrate)){
+                                                    // print_r($totalProductrate);
+                                                        $totalRate          = 0; 
+                                                        $itemsrate          = array_column($totalProductrate, 'total');
+                                                        $totalItemRate      = array_sum($itemsrate);                                                        
+                                                        $starcount          = array_column($totalProductrate, 'starcount');
+                                                        $totalstarcount      = array_sum($starcount);                                                        
+                                                        for($i=5;$i>=1;$i--){ 
+                                                            $star_percentage            = 0;
+                                                            foreach($totalProductrate as $row1){                                                               
+                                                                $pstar_rate             = $row1['star_rate'];
+                                                                if($pstar_rate == $i){                                                                                                                                    
+                                                                    $pstar_tot          = $row1['total'];
+                                                                    $pstarcount         = $row1['starcount'];
+                                                                    $star_percentage = ($pstarcount / $totalstarcount) * 100;
+                                                                }
+                                                            } 
+                                                                                                            
+                                                ?>  
                                                 <div class="progress">
-                                                    <span>5 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 50%;"
-                                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%
+                                                    <span><?php echo $i;?> star</span>
+                                                    <div class="progress-bar" role="progressbar" style="width: <?php echo round($star_percentage);?>%;"
+                                                        aria-valuenow="<?php echo round($star_percentage);?>" aria-valuemin="0" aria-valuemax="100"><?php echo round($pstarcount);?>
                                                     </div>
                                                 </div>
-                                                <div class="progress">
-                                                    <span>4 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 25%;"
-                                                        aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>3 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 45%;"
-                                                        aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%
-                                                    </div>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>2 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 65%;"
-                                                        aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%
-                                                    </div>
-                                                </div>
-                                                <div class="progress mb-30">
-                                                    <span>1 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 85%;"
-                                                        aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%
-                                                    </div>
-                                                </div>
-                                                <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
+                                                <?php
+                                                 }  }                                           
+                                                ?>                                                
                                             </div>
                                         </div>
                                     </div>

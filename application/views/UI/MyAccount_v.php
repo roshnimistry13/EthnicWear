@@ -54,7 +54,7 @@
                                 <div class="tab-pane fade active show" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                     <div class="row">
                                         <div class="col-12">
-                                            <div class="shop-product-fillter float-end">
+                                            <!-- <div class="shop-product-fillter float-end">
                                                 <div class="sort-by-product-area">
                                                     <div class="sort-by-cover">
                                                         <div class="sort-by-product-wrap">
@@ -73,7 +73,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                     <div class="card">
@@ -106,10 +106,16 @@
                                                                 </a>
                                                             </td> -->
                                                         </tr>
-                                                        <?php } } ?>
+                                                        <?php } }else{ ?>
+                                                        <tr>
+                                                            <td colspan=3>
+                                                                No Order Found !!
+                                                            </td>
+                                                        </tr>
+                                                        <?php } ?>
                                                     </tbody>
                                                 </table>
-                                            </div>
+                                            </div>                                           
                                         </div>
                                     </div>
                                 </div>

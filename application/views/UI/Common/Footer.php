@@ -365,6 +365,7 @@ var UI_ASSETS = "<?php echo UI_ASSETS ?>";
 <script src="<?php echo UI_ASSETS ?>js/plugins/jquery.elevatezoom.js"></script>
 <!-- Template  JS -->
 
+<!-- <script src="<?php echo UI_ASSETS ?>js/jquery.auto-complete.min.js"></script> -->
 <script src="<?php echo UI_ASSETS ?>js/main.js?v=3.4"></script>
 <script src="<?php echo UI_ASSETS ?>js/shop.js?v=3.4"></script>
 <script src="<?php echo UI_ASSETS ?>js/toastify-js.js"></script>

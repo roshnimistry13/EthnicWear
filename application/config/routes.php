@@ -252,4 +252,5 @@ $route['search']                    = "Home/privacyPolicy";
 $route['forgot-password']           = "Home/forgotPassword";
 $route['reset-password']            = "Home/restPassword";
 $route['submit-reset-password']     = "Home/submitRestPassword";
+$route['search-product']            = "Home/searchProduct";
 

@@ -2,8 +2,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow">Home</a>
-                <span></span> Shop
+                <?php echo $breadcrumbs;?>
             </div>
         </div>
     </div>
@@ -81,7 +80,7 @@
                     </div>
                 </div>
                 <div class="col-lg-3 primary-sidebar sticky-sidebar">
-
+                <?php if(empty($this->session->userdata('search_sess'))){?>
                     <div class="widget-category mb-30">
                         <h5 class="section-title style-1 mb-10 wow fadeIn animated">Category</h5>
                         <ul class="categories">
@@ -103,6 +102,7 @@
                             <?php } } }?>
                         </ul>
                     </div>
+                <?php } ?>
                     <!-- Fillter By Price -->
                     <div class="sidebar-widget price_range range mb-30">
                         <div class="widget-header position-relative mb-20 pb-10">

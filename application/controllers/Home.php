@@ -100,6 +100,8 @@ class Home extends CI_Controller
 	/*** SHOP / PRODUCT LIST */
 	public function product() {
 		$this->session->unset_userdata('filter_sess');
+		$this->session->unset_userdata('search_sess');
+		$search 				= trim($this->input->post('txt_search'));
 		$short_code 			= "women"; //$this->input->get('category'); 
 		$category_id 			= ''; 
 		$data['breadcrumbs'] 	= '';
@@ -118,24 +120,34 @@ class Home extends CI_Controller
 				$session_data['end_price'] 		= 10000;
 				$this->session->set_userdata('filter_sess', $session_data);
 
+				if($search != "" || $search != null){
+					$search_keyword['search'] 		= $search;
+					$this->session->set_userdata('search_sess', $search_keyword);
+				}
+				
+
 				$cat_hierarchy 					= $this->Master_m->getCategoryhierarchy($cat_id);
 				$count 							= count($cat_hierarchy);
 				if(!empty($cat_hierarchy)){
 
-					$breadcrumbs			= '<i class="facl facl-angle-right"></i>';
+					$breadcrumbs			= '<a href="'.base_url('home').'" rel="nofollow">Home</a><span></span> <a href="'.base_url('shop').'" rel="nofollow">Shop</a>';
 					$i 						= 1;
 					foreach($cat_hierarchy as $row){
 						if($count == $i){
-							$breadcrumbs .= $row['name'];
-						}else{
-							$breadcrumbs .= '<a href="'.base_url('shop?category=').strtolower($row['shortcode']).'">'.$row['name'].'</a><i class="facl facl-angle-right"></i>';
-						}					
+							$breadcrumbs .= '<span></span>'.$row['name'];
+						}				
 						$i++;
+					}
+
+					if(!empty($this->session->userdata('search_sess'))){
+						$search 					= $this->session->userdata['search_sess']['search'];
+						$breadcrumbs .= '<span></span>'.$search;
 					}
 					$data['breadcrumbs'] = $breadcrumbs;
 				}
 			}
 		}
+		
 		$data['color_list']				= $this->Master_m->allProductFilterColor($category_id);
 		$totalCate						= $this->Master_m->getTotalCategoryCount($category_id);
 		$totalBrand						= $this->Master_m->getTotalBrandCount($category_id);
@@ -149,8 +161,7 @@ class Home extends CI_Controller
 		if(!empty($totalCate)){
 			foreach($totalCate as $key=>$val){								
 				$cat_arr[$key]['parent_cat_count'] 		= count($val);
-				$sub_cat_res 		= $this->Master_m->getChildCategory(null,$key);
-				
+				$sub_cat_res 							= $this->Master_m->getChildCategory(null,$key);
 				if(!empty($sub_cat_res)){
 					foreach($sub_cat_res as $subcat){
 						$sub_cat_id 		= $subcat['category_id'];						
@@ -302,11 +313,12 @@ class Home extends CI_Controller
 			$data['product_review_list'] 		= $this->Master_m->getProductAllReviews($product_id);
 			$similer_products					= $this->Master_m->getSimilerProducts($child_category,$product_id);
 			$data['similer_products'] 			= $this->Master_m->createVarientList($similer_products);
+			$data['totalProductrate'] 			= $this->Master_m->gettotalOfProductrates($product_id);
 			
 			//$data['product_element'] 	= $this->Master_m->getProductElemetsAttributes($product_id);			
 			$data['product_detail'] 	= $product_detail[0];
-			$data['elearr'] 		= $elearr;
-			$data['variant_code'] 	= $variant_code;
+			$data['elearr'] 			= $elearr;
+			$data['variant_code'] 		= $variant_code;
 			
 			//Meta Data
 			$meta_data['meta_title']				= "Shop | ".UI_THEME;
@@ -753,7 +765,14 @@ class Home extends CI_Controller
 			  $filter['end_price'] 			= $this->session->userdata['filter_sess']['end_price'];
 			  $filter['sortby'] 			= $this->session->userdata['filter_sess']['sortby'];
 		  }
-		
+
+		  if(!empty($this->session->userdata('search_sess'))){
+			$filter['tag'] 					= $this->session->userdata['search_sess']['search'];
+		  }
+		  else{
+			$filter['tag'] 			= "";
+		  }
+
 		  $per_page 			= '';
 		  $rNo 					= '';
 		  $products_result 		= $this->Master_m->getFilterData($filter,$per_page,$rNo);
@@ -840,11 +859,12 @@ class Home extends CI_Controller
 		  $config['last_tag_close']  		= '</li>';  
 	 
 		  $this->pagination->initialize($config);  
-	 
+		  
 		  $data['pagination'] 		= $this->pagination->create_links();  
 		  $data['whish_product'] 	= $whish_product;  
 		  $data['result'] 			= $elearr;  
 		  $data['row'] 				= $rowno; 
+		  
 		 
 		  echo json_encode($data); 
 	}
@@ -993,6 +1013,13 @@ class Home extends CI_Controller
         if($rowno != 0){  
           $rowno = ($rowno-1) * ROW_PER_PAGE;  
         }  
+
+		if(!empty($this->session->userdata('search_sess'))){
+			$filter['tag'] 					= $this->session->userdata['search_sess']['search'];
+		  }
+		  else{
+			$filter['tag'] 			= "";
+		  }
 		
 		$per_page 		= '';
 		$rNo 			= '';
@@ -1905,5 +1932,54 @@ class Home extends CI_Controller
 		}
 		$this->output->set_content_type('application/json', 'utf-8');
 		$this->output->set_output(json_encode($json));
+	}
+
+	/**** GET SUGGESTION FROM KEYWORD */
+	public function getSuggestion(){
+		$json = array();		
+		if($this->input->is_ajax_request()){
+			$search 					= trim($this->input->post('search')); 
+			$result 					= $this->Master_m->searchBykeywords($search,null); 
+			$tag_arr 					= array();
+			if(!empty($result))
+				{
+					
+					foreach($result as $row)
+					{
+						$tag = explode(',',$row['tag']);
+						foreach($tag as $t_row)
+						{
+							if(strpos(strtolower($t_row),strtolower($search)) !== false)
+							{
+								if(!in_array($t_row,$tag_arr))
+									$tag_arr[] = $t_row;
+							}
+							else
+							{
+							}	
+						}
+					}
+				}
+			//$json['success'] 			= "success";
+			$json['suggestion'] 		= $tag_arr;
+			
+		}
+		$this->output->set_content_type('application/json', 'utf-8');
+		$this->output->set_output(json_encode($json));
+	}
+
+	/***** SEARCH KEYWORD */
+	public function searchProduct(){
+		$search 					= trim($this->input->post('txt_search'));
+		//Meta Data
+		$meta_data['meta_title']			= "Product | ".UI_THEME;
+		$meta_data['meta_description']		= "Product | ".UI_THEME;
+		$meta_data['meta_keyword']			= "Product | ".UI_THEME;
+		$meta_data['active_menu']			= "Product";
+		
+		$this->load->view('UI/Common/Header',$meta_data);
+		//$this->load->view('UI/Common/Menubar');
+		$this->load->view('UI/Search_v');
+		$this->load->view('UI/Common/Footer');
 	}
 }
