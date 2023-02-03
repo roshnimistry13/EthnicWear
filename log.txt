@@ -1,0 +1,21 @@
+
+/*******  DATA BASE ********************/
+DB : proacoeg_ethnicwear
+User : proacoeg_ethnic_user
+Pwd : Y]Ln$g=FK1Gb
+
+/*********** URL  ************************/
+
+Admin       : https://proactii.com/EthnicWear/
+emial       : devloperproactii@gmail.com
+Password    : admin
+
+vendor      : https://proactii.com/EthnicWear/
+emial       : vendor1@gmail.com , vendor2@gmail.com
+Password    : vendor
+
+Devloper    : https://proactii.com/EthnicWear/dev-logon
+emial       : devloperproactii@gmail.com
+Password    : 654321
+
+/**********************************************/
